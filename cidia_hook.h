@@ -182,6 +182,8 @@ public:
         CloseHandle(hRemoteThread);
         VirtualFreeEx(M_PROCESS.PROCESS_HANDLE, pRemoteCode, 0, MEM_RELEASE);
 
+        void* thread = (void*)((uintptr_t)hRemoteThread);
+        SpoofAddress(NULL, (uintptr_t)thread, 0x0);
 
     }
     int GetId()
@@ -204,7 +206,6 @@ public:
         void* thread = (void*)((uintptr_t)hLoadThread);
         //void* thread = (void*)(GetProcAddress(GetModuleHandleA("kernel32.dll"), "CreateRemoteThread"));
         WaitForSingleObject(hLoadThread, INFINITE);
-
         SpoofAddress(NULL, (uintptr_t)thread, 0x0);
 
     }
@@ -214,13 +215,4 @@ public:
     }
 };
 
-void test()
-{
-    void* addr = 0;
-    unsigned char pach[1] = { 0x90 };
-    //Process("test.exe").Open().Protect(NULL, 0x11, 0, 0, std::bind(static_cast<void* (*)(void*, const void*, std::size_t)>(&memcpy), addr, pach, sizeof(pach)));
-    Process m_Process("test.exe");
-    m_Process.Open();
-    m_Process.Close();
-}
 
