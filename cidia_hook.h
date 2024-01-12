@@ -122,7 +122,7 @@ public:
         void* address = (void*)((uintptr_t)GetModuleAddress(module) + addr);
         if (ReadProcessMemory(M_PROCESS.PROCESS_HANDLE, (LPCVOID)address, buff, sizeof(buff), &bytesRead))
         {
-            bytesRead_t = bytesRead;
+            *bytesRead_t = bytesRead;
             return (T*)(buff);
         }
         else
@@ -192,7 +192,7 @@ public:
     {
         return M_PROCESS.PROCESS_HANDLE;
     }
-    void Inject(LPCSTR dllPath)// inject a dll and spoof the Thread from the process´s anticheat
+    void Inject(LPCSTR dllPath)// inject a dll and spoof the Thread from the processÂ´s anticheat
     {
         LPVOID baseAddress = VirtualAllocEx(M_PROCESS.PROCESS_HANDLE, NULL, strlen(dllPath) + 1, MEM_COMMIT, PAGE_READWRITE);
 
