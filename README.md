@@ -1,7 +1,7 @@
 # simple-external-cheat-api
 simpel tools like spoofaddress, dll injectsion thread spoof &amp; CreateRemoteThread address spoof, and much more 
 
-to use
+
     void* addr = 0;
     unsigned char pach[1] = { 0x90 };
     Process("test.exe").Open().Protect(NULL, 0x11, 0, 0, std::bind(static_cast<void* (*)(void*, const void*, std::size_t)>(&memcpy), addr, pach, sizeof(pach)));
