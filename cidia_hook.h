@@ -123,7 +123,7 @@ public:
         if (ReadProcessMemory(M_PROCESS.PROCESS_HANDLE, (LPCVOID)address, buff, sizeof(buff), &bytesRead))
         {
             *bytesRead_t = bytesRead;
-            return (T*)(buff);
+            return *(T*)(buff);
         }
         else
         {
